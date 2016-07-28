@@ -1,0 +1,8 @@
+body {
+  padding-top: 70px;
+}
+
+.navbar-right {
+    float: right!important;
+    margin-right: -15px;
+}

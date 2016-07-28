@@ -1,0 +1,24 @@
+.container.center{
+	background-color: #fff;
+    border: 1px solid #ddd;
+	padding: 15px;
+    margin-bottom: -1px;
+	border-radius: 5px;
+}
+
+#container {
+	width: 300px;
+}
+
+.container .input-group {
+	margin-bottom: 10px;
+}
+
+.center-div {
+	margin-top: 15%;
+	background-color: #fff;
+    border: 1px solid #ddd;
+	padding: 15px;
+    margin-bottom: -1px;
+	border-radius: 5px;
+}
