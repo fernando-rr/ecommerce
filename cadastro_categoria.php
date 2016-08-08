@@ -99,7 +99,7 @@
 						<a href="#adicionar-categoria" class="btn btn-primary" style="margin-left: 320px; width: 105px">Adicionar</a>
 						<div class="list-group">
 							<div class="radio">
-								<label><input type="radio" class='optCategoria' value="0" checked name="optCategoria">Adicionar nova categoria</input></label>
+								<label><input type="radio" class='optCategoria' value="0" checked name="optCategoria">Adicionar nova categoria</label>
 							</div>
 							<?php
 								$categorias = mysqli_query($conn, "SELECT * FROM categoria");

@@ -68,15 +68,17 @@
 			}
 		} else if($acao == "Salvar") {
 			$id = $_POST["optProduto"];
-			if (isset($_FILES['imagem']) && $_FILES['imagem']['size'] > 0) {
+			
+			if ($_FILES['imagem']['size'] > 0) {
 				$tmpName = $_FILES['imagem']['tmp_name'];
 				$fp 	 = fopen($tmpName, 'r');
 				$imagem  = fread($fp, filesize($tmpName));
 				$imagem  = addslashes($imagem);
 				fclose($fp);
 				$imagem = "'" . $imagem . "'";
+				$imagem = ", prod_imagem = $imagem";
 			} else {
-				$imagem = "null";
+				$imagem = "";
 			}
 			
 			$conn->query("	UPDATE produto 
@@ -84,8 +86,8 @@
 								   prod_titulo     = '$titulo',
 								   prod_valor      = $valor,
 								   prod_valorDesc  = $valor_desc,
-								   prod_quantidade = $quantidade,
-								   prod_imagem     = $imagem
+								   prod_quantidade = $quantidade
+								   $imagem
 							WHERE prod_id = $id");
 			
 			$conn->query("DELETE FROM categoria_produto WHERE catProd_produto = $id");
@@ -148,9 +150,9 @@
 						</div>
 						<div class="input-group margin-bottom-sm">
 							<span class="input-group-addon"><i class="fa fa-money fa-fw"></i></span>
-							<input id="valor" name="valor" class="form-control" type="text" placeholder="Valor" value="R$ 0,00"/>
+							<input id="valor" name="valor" class="form-control" type="text" placeholder="Valor" data-allow-zero="true" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","/>
 							<span class="input-group-addon"><i class="fa fa-fw"></i></span>
-							<input id="valor-desc" name="valor-desc" class="form-control" type="text" placeholder="Valor desc." value="R$ 0,00"/>
+							<input id="valor-desc" name="valor-desc" class="form-control" type="text" placeholder="Valor desc." data-allow-zero="true" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","/>
 							<span class="input-group-addon"><i class="fa fa-fw"></i></span>
 							<input id="quantidade" name="quantidade" class="form-control" type="number" placeholder="Quantidade" value="0"/>
 						</div>
@@ -172,7 +174,7 @@
 									}
 								} else {
 									print "Nenhuma categoria cadastrada";
-								}http://localhost/ecommerce/cadastro_produto.php#adicionar-produto
+								}
 							?>
 						</div>
 						<a class="btn btn-danger" id="deletar-produto" href="#" style="position: absolute; display: none">
@@ -194,8 +196,8 @@
 <script src="js/ecommerce.js"></script>
 <script>
 	$(function(){
-		$("#valor").maskMoney({prefix:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true, allowZero:true});
-		$("#valor-desc").maskMoney({prefix:'R$ ', showSymbol:true, thousands:'.', decimal:',', symbolStay: true, allowZero:true});
+		$("#valor").maskMoney();
+		$("#valor-desc").maskMoney();
 		$("#titulo").focus();
 		function readURL(input) {
 			if (input.files && input.files[0]) {
@@ -213,5 +215,5 @@
 			readURL(this);
 			$('#preview').show();
 		});
-	})
+	});
 </script>
